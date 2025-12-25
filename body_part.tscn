@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgei2p1fpmduj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12r4b"]
+size = Vector2(10, 10)
+
+[node name="Body Part" type="StaticBody2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_12r4b")

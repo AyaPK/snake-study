@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://g0oetsoqc1w1"]
+
+[ext_resource type="Script" uid="uid://5a5vkalmfn4n" path="res://snake.gd" id="1_gxkgb"]
+[ext_resource type="PackedScene" uid="uid://cgei2p1fpmduj" path="res://body_part.tscn" id="2_2x2sd"]
+[ext_resource type="Script" uid="uid://bnb4sxhvs6123" path="res://head.gd" id="3_2x2sd"]
+
+[node name="Snake" type="Node2D"]
+script = ExtResource("1_gxkgb")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Head" parent="." instance=ExtResource("2_2x2sd")]
+script = ExtResource("3_2x2sd")
+
+[node name="body1" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -10)
+
+[node name="body2" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -20)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

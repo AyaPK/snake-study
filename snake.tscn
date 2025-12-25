@@ -19,4 +19,19 @@ position = Vector2(0, -10)
 [node name="body2" parent="." instance=ExtResource("2_2x2sd")]
 position = Vector2(0, -20)
 
+[node name="body3" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -30)
+
+[node name="body4" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -40)
+
+[node name="body5" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -50)
+
+[node name="body6" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -60)
+
+[node name="body7" parent="." instance=ExtResource("2_2x2sd")]
+position = Vector2(0, -70)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

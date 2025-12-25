@@ -14,3 +14,8 @@ config/name="snake"
 run/main_scene="uid://3nk6uy1spp1f"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=600

@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://3nk6uy1spp1f"]
+[gd_scene load_steps=3 format=3 uid="uid://3nk6uy1spp1f"]
 
+[ext_resource type="Script" uid="uid://dw24ulkbf5v1c" path="res://level.gd" id="1_0b4ue"]
 [ext_resource type="PackedScene" uid="uid://g0oetsoqc1w1" path="res://snake.tscn" id="1_u52ul"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_0b4ue")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_u52ul")]
-position = Vector2(270, 130)
+position = Vector2(100, 100)

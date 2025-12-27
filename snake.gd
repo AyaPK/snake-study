@@ -2,7 +2,7 @@ extends Node2D
 
 const BODY_PART = preload("uid://cgei2p1fpmduj")
 
-@onready var checker: RayCast2D = $Checker
+@onready var checker: RayCast2D = $Head/Checker
 
 var direction: String = "down"
 var move_speed: float = 0.05
@@ -10,14 +10,17 @@ var new_pos: Vector2
 var old_pos: Vector2
 var accepting_input: bool = true
 var should_spawn_part: bool = false
+var alive: bool = true
 
 func _ready() -> void:
 	$Timer.wait_time = move_speed
 	$Timer.start()
+	$Head.color.color = "#ff1619"
 
 func _on_timer_timeout() -> void:
-	$Timer.start()
-	_move_snake()
+	if alive:
+		$Timer.start()
+		_move_snake()
 
 func _move_snake() -> void:
 	if direction == "down":
@@ -35,32 +38,20 @@ func _move_snake() -> void:
 	
 	if direction == "down":
 		$Head.global_position.y += 10
-		if $Head.global_position.y > 600:
+		if $Head.global_position.y > 250:
 			$Head.global_position.y = 0
-		checker.global_position.y += 10
-		if checker.global_position.y > 600:
-			checker.global_position.y = 5
 	elif direction == "right":
 		$Head.global_position.x += 10
-		if $Head.global_position.x > 600:
+		if $Head.global_position.x > 250:
 			$Head.global_position.x = 0
-		checker.global_position.x += 10
-		if checker.global_position.x > 600:
-			checker.global_position.x = -5
 	elif direction == "left":
 		$Head.global_position.x -= 10
 		if $Head.global_position.x < 0:
-			$Head.global_position.x = 600
-		checker.global_position.x -= 10
-		if checker.global_position.x < 0:
-			checker.global_position.x = 605
+			$Head.global_position.x = 250
 	elif direction == "up":
 		$Head.global_position.y -= 10
 		if $Head.global_position.y < 0:
-			$Head.global_position.y = 595
-		checker.global_position.y -= 10
-		if checker.global_position.y < 0:
-			checker.global_position.y = 600
+			$Head.global_position.y = 250
 	new_pos = $Head.global_position
 	for _c in get_children():
 		if _c is StaticBody2D and _c is not Head:
@@ -89,10 +80,8 @@ func _process(_delta: float) -> void:
 			accepting_input = false
 
 func check_ahead() -> void:
-	# Update the raycast before checking
 	checker.force_raycast_update()
 
-	# Check collision and confirm class type
 	if checker.is_colliding():
 		var collider = checker.get_collider()
 		if collider is Food:
@@ -100,6 +89,11 @@ func check_ahead() -> void:
 			await collider.tree_exited
 			get_parent().spawn_food()
 			should_spawn_part = true
+		elif collider is StaticBody2D and collider is not Head:
+			alive = false
+			for _c in get_children():
+				if _c is BodyPart:
+					_c.color.color = "#111111"
 
 func spawn_body_part():
 	var new_part: StaticBody2D = BODY_PART.instantiate()

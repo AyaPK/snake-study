@@ -13,6 +13,11 @@ one_shot = true
 [node name="Head" parent="." instance=ExtResource("2_2x2sd")]
 script = ExtResource("3_2x2sd")
 
+[node name="Checker" type="RayCast2D" parent="Head"]
+position = Vector2(5, 5)
+target_position = Vector2(0, 11)
+collide_with_areas = true
+
 [node name="body1" parent="." instance=ExtResource("2_2x2sd")]
 position = Vector2(0, -10)
 
@@ -33,10 +38,5 @@ position = Vector2(0, -60)
 
 [node name="body7" parent="." instance=ExtResource("2_2x2sd")]
 position = Vector2(0, -70)
-
-[node name="Checker" type="RayCast2D" parent="."]
-position = Vector2(5, 5)
-target_position = Vector2(0, 11)
-collide_with_areas = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
